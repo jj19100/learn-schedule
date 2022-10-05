@@ -101,6 +101,7 @@ function perform(work) {
   if (work.count === 0) {
     const workIndex = workList.indexOf(work)
     workList.splice(workIndex, 1)
+    // 任务执行完的时候，将prevPriority制空
     prevPriority = undefined;
   } else {
     prevPriority = work.priority;

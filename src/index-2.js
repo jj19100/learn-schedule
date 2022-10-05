@@ -81,7 +81,7 @@ function schedule() {
   }
   const { priority } = curWork;
   // 只有本次任务优先级 > 已经正在在执行的任务的优先级,才会中断正在执行的任务
-  if (priority === prevPriority) {
+  if (priority <= prevPriority) {
     return;
   }
   // 此时本次的任务优先级 > 正在执行的任务优先级
@@ -99,6 +99,7 @@ function perform(work) {
   if (work.count === 0) {
     const workIndex = workList.indexOf(work)
     workList.splice(workIndex, 1)
+    // 任务执行完的时候，将prevPriority制空
     prevPriority = undefined;
   }
   while (work.count) {
